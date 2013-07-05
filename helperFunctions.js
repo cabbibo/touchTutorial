@@ -19,9 +19,9 @@ function getDistanceFromPointables( object ){
 function leapToScene( obj ){
 
   newPos = {
-    x: two.width/2 + obj.x,
-    y: two.height - obj.y, 
-    z: obj.z
+    x: two.width/2 + (obj[0]/100)*two.width,
+    y: two.height/2 - ((obj[1]-200)/100)*two.height, 
+    z: obj[2]
   }
 
   return newPos

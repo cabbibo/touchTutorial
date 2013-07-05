@@ -10,6 +10,7 @@ function PARTICLE( pointer , index, size , translation, velocity , decayRate ){
   this.circle = two.makeCircle( this.translation.x , this.translation.y , 1);
   this.circle.fill = this.pointer.color;
   this.circle.linewidth = .1;
+  midground.add( this.circle);
   this.friction = .98;
 
 }
@@ -35,6 +36,18 @@ PARTICLE.prototype = {
 
     }
 
+    if( this.translation.x < 0 ){
+      this.translation.x += two.width;
+    } else if( this.translation.x > two.width ) {
+      this.translation.x -= two.width;
+    }
+
+    if( this.translation.y < 0 ){
+      this.translation.y += two.height;
+    } else if( this.translation.y > two.height ) {
+      this.translation.y -= two.height;
+    }
+
     this.velocity.x *= this.friction;
     this.velocity.y *= this.friction;
 
@@ -42,7 +55,7 @@ PARTICLE.prototype = {
     this.size -= this.decayRate;
 
     if( this.size < 0 ){
-      two.remove(this.circle);
+      midground.remove(this.circle);
       this.pointer.particles[this.index] = undefined;
     }
     this.circle.scale = this.size;

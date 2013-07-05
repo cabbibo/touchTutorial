@@ -69,9 +69,11 @@ function EMITTER( params ){
   this.oTranslation = new Two.Vector( 100 , 100 );
   this.velocity = new Two.Vector( 0 , 0 ); 
 
-  this.centerCircle = two.makeCircle( 0 , 0 , this.size );
-  this.centerCircle.color = this.color;
-  this.foreground.add( this.centerCircle );
+  this.circle = two.makeCircle( 0 , 0 , this.size );
+  this.circle.color = this.color;
+  this.circle.stroke = this.color;
+  this.foreground.add( this.circle );
+  foreground.add(this.foreground);
 
   this.particles = [];
   this.particleIndex = 0;
@@ -113,11 +115,11 @@ EMITTER.prototype = {
       
         if( this.particleIndex >= this.maxParticles ){
           this.particleIndex = 0;
-        }
+        } 
 
       }else{
 
-        two.remove(this.particles[this.particleIndex].circle);
+        midground.remove(this.particles[this.particleIndex].circle);
      
         this.createNewParticle();
         
@@ -136,7 +138,6 @@ EMITTER.prototype = {
 
   checkInside:function(x,y){
 
-    console.log(x + ' , ' + y );
     for( var i = 0 ; i < containers.length; i ++){
 
       var center = containers[i].scene.translation;
@@ -145,13 +146,12 @@ EMITTER.prototype = {
       var inHor = x < center.x + width/2 && x > center.x - width/2 ;
       var inVert = y < center.y + height/2 && y > center.y - height/2 ;
       if( inVert && inHor ){
-        console.log(containers[i]);
         this.insideOf = containers[i];
         background.remove(containers[i].scene);
-        foreground.add(containers[i].scene);
+        midground.add(containers[i].scene);
       }else{
         background.add(containers[i].scene);
-        foreground.remove(containers[i].scene);
+        midground.remove(containers[i].scene);
       }
 
     }
@@ -163,9 +163,6 @@ EMITTER.prototype = {
     this.foreground.translation.copy(this.translation);
     this.background.translation.copy(this.translation);
 
-    if( this.insideOf ){
-      this.insideOf.scene.translation.copy( this.translation );
-    }
     if( pointer.constantlyEmit == true ){
       pointer.emitParticles();
     }
@@ -178,6 +175,9 @@ EMITTER.prototype = {
 
     }
 
+    if( this.insideOf ){
+      this.insideOf.scene.translation.copy( this.translation );
+    }
   }
 
 }

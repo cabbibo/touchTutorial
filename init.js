@@ -19,6 +19,7 @@ function init(){
   controller.on('frame', leapLoop);
 
   background = two.makeGroup();
+  midground = two.makeGroup();
   foreground = two.makeGroup();
   
   
@@ -30,7 +31,7 @@ function init(){
     containers.push(container);
   }
 
-  $('body').mousemove(function(event){
+  /*$('body').mousemove(function(event){
     pointer.oTranslation.x = pointer.translation.x; 
     pointer.oTranslation.y = pointer.translation.y; 
     pointer.translation.x = event.pageX;
@@ -40,8 +41,8 @@ function init(){
     if( pointer.emitOnMove == true ){
       pointer.emitParticles();
     }
-  });
-  $('body').mouseup(function(event){
+  });*/
+  /*$('body').mouseup(function(event){
     pointer.color = pointer.hoverColor;
     pointer.insideOf = undefined;
     pointer.constantlyEmit = false;
@@ -55,7 +56,7 @@ function init(){
     pointer.checkInside( event.pageX , event.pageY);
 
 
-  });
+  });*/
 
 
 

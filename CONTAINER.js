@@ -34,18 +34,22 @@ function CONTAINER( params ){
     this.color = "#4791c1";
   }
 
-  this.object = two.makeRectangle( 0 , 0 , this.width , this.height );
+  this.square = two.makeRectangle( 0 , 0 , this.width , this.height );
 
-  this.object.fill = this.color;
-  console.log( this.object);
+  this.square.fill = this.color;
 
-  this.scene.add(this.object);
+  this.scene.add(this.square);
+  background.add(this.scene);
 
 }
 
 
 CONTAINER.prototype = {
 
+  update:function(){
+
+
+  }
 
 
 }
